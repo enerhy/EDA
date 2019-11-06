@@ -1,0 +1,16 @@
+-------Data Exploration DataFrames-------
+
+df.head()
+df.describe()
+
+#Null Values
+df.isnull().any()
+df.isnull().sum()
+
+
+
+
+------Data Cleansing-----
+# Deleteing a column
+df = df.drop(['Cabin'], axis = 1)
+
