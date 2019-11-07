@@ -13,6 +13,9 @@ sns.factorplot(x='Survived', col='Sex', kind='count', data=df);
 
 #Percentage in a binary case for a feature
 sns.barplot(x='Pclass', y='Survived', data=df)
+# similar to this
+axes = sns.factorplot('relatives','Survived', 
+                      data=df, aspect = 2.5, )
 
 
 #Histogramm
