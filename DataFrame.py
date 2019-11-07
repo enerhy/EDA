@@ -10,6 +10,16 @@ df.groupby('Survived').Fare.describe()
 df.isnull().any()
 df.isnull().sum()
 df.isnull().sum() / df.shape[0]         #in Percentage
+total = train_df.isnull().sum().sort_values(ascending=False)
+
+#more fancy with percentage
+total = df.isnull().sum().sort_values(ascending=False)
+percent_1 = df.isnull().sum()/df.isnull().count()*100
+percent_2 = (round(percent_1, 1)).sort_values(ascending=False)
+missing_data = pd.concat([total, percent_2], axis=1, keys=['Total', '%'])
+missing_data.head(5)
+
+
 
 #Counting apearance of values of a feature
 df.Embarked.value_counts() #/NaN values not included
@@ -73,6 +83,5 @@ df = df.drop(['Sex'], axis = 1)
 predict_df = pd.DataFrame(predict, columns=['Survived'])
 TEST_PRED = pd.concat([TEST_PRED, predict_df], axis=1)  
 TEST_PRED[['PassengerId', 'Survived']].to_csv('Prediction_test.csv', index=False)
-
 
 
