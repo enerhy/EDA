@@ -41,8 +41,33 @@ ag5 = df.groupby('Survived')['Age'].std()
 
 
 
-
 ------Data Cleansing-----
 # Deleteing a column
 df = df.drop(['Cabin'], axis = 1)
+
+#Replacing NaN values 
+df["Embarked"].fillna("N", inplace = True)
+df['Age'] = df['Age'].fillna(df['Age'].median())
+
+#Adding a column of zeros to the DF
+d = pd.DataFrame(0, index=np.arange(418), columns=['category_N'])
+df_test = pd.concat([df_test, d], axis=1)
+
+#Rearanging the columns
+df_test = df_test[['Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'category_female', 'category_male', 'category_C', 'category_N', 'category_Q', 'category_S']]
+
+#Changing data type into numeric
+for i in range (len(df.columns) - 1):
+    df.iloc[i] = pd.to_numeric(df.iloc[i])
+
+
+---One Hot Encoder
+df['Sex'] = pd.Categorical(df['Sex'])
+dfDummies = pd.get_dummies(df['Sex'], prefix = 'category')
+df = pd.concat([df, dfDummies], axis=1)
+df = df.drop(['Sex'], axis = 1)
+
+
+
+
 
