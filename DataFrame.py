@@ -101,3 +101,11 @@ TEST_PRED = pd.concat([TEST_PRED, predict_df], axis=1)
 TEST_PRED[['PassengerId', 'Survived']].to_csv('Prediction_test.csv', index=False)
 
 
+---Aggregate 2 coulumns and extract a new column out of them
+data = [df, df_test]
+for dataset in data:
+    dataset['relatives'] = dataset['SibSp'] + dataset['Parch']
+    dataset.loc[dataset['relatives'] > 0, 'not_alone'] = 0
+    dataset.loc[dataset['relatives'] == 0, 'not_alone'] = 1
+    dataset['not_alone'] = dataset['not_alone'].astype(int)
+df['not_alone'].value_counts()
