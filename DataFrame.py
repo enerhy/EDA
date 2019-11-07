@@ -69,5 +69,10 @@ df = df.drop(['Sex'], axis = 1)
 
 
 
+#Puting list of prediction into a DataFrame
+predict_df = pd.DataFrame(predict, columns=['Survived'])
+TEST_PRED = pd.concat([TEST_PRED, predict_df], axis=1)  
+TEST_PRED[['PassengerId', 'Survived']].to_csv('Prediction_test.csv', index=False)
+
 
 
