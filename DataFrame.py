@@ -19,6 +19,12 @@ percent_2 = (round(percent_1, 1)).sort_values(ascending=False)
 missing_data = pd.concat([total, percent_2], axis=1, keys=['Total', '%'])
 missing_data.head(5)
 
+#Values counts
+ag1 = df['Survived'].value_counts() #aggregates for the values
+ag1 = df['Survived'].value_counts().plot(kind = 'bar')
+
+
+
 #Conditional Selections
 cond1 = df['Age'] > 60 #returns true or falls values for the column
 cond2 = df[df['Age'] > 60] #returns the DF with the statisfied condition
