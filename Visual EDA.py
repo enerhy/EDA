@@ -11,6 +11,9 @@ sns.countplot(x='Survived', data=df)
 #Counting separated with aditional feature (similar to Pivot)
 sns.factorplot(x='Survived', col='Sex', kind='count', data=df);
 
+#Percentage in a binary case for a feature
+sns.barplot(x='Pclass', y='Survived', data=df)
+
 
 #Histogramm
 sns.distplot(df.Fare, kde=False);
@@ -45,6 +48,14 @@ ax.set_title('Male')
 FacetGrid = sns.FacetGrid(df, row='Embarked', size=4.5, aspect=1.6)
 FacetGrid.map(sns.pointplot, 'Pclass', 'Survived', 'Sex', palette=None,  order=None, hue_order=None )
 FacetGrid.add_legend()
+
+----Histograms with twi conditional features (1. category, second binary result)
+#We create a grid of features and fill it with the histogramm over a 3d feature
+grid = sns.FacetGrid(df, col='Survived', row='Pclass', size=3.5, aspect=1.6)
+grid.map(plt.hist, 'Age', alpha=.5, bins=20)
+grid.add_legend();
+
+
 
 
 
