@@ -22,3 +22,32 @@ sns.swarmplot(x='Survived', y='Fare', data=df);
 
 #Pair plot
 sns.pairplot(df, hue='Survived');
+
+
+---#Histogram of a feature with a binary result by group
+survived = 'survived'
+not_survived = 'not survived'
+fig, axes = plt.subplots(nrows=1, ncols=2,figsize=(10, 4))
+women = df[df['Sex']=='female']
+men = df[df['Sex']=='male']
+ax = sns.distplot(women[women['Survived']==1].Age.dropna(), bins=18, label = survived, ax = axes[0], kde =False)
+ax = sns.distplot(women[women['Survived']==0].Age.dropna(), bins=40, label = not_survived, ax = axes[0], kde =False)
+ax.legend()
+ax.set_title('Female')
+
+ax = sns.distplot(men[men['Survived']==1].Age.dropna(), bins=18, label = survived, ax = axes[1], kde = False)
+ax = sns.distplot(men[men['Survived']==0].Age.dropna(), bins=40, label = not_survived, ax = axes[1], kde = False)
+ax.legend()
+ax.set_title('Male')
+-------------
+
+----Relationship between two categorical features and a binary result in prercentage
+FacetGrid = sns.FacetGrid(df, row='Embarked', size=4.5, aspect=1.6)
+FacetGrid.map(sns.pointplot, 'Pclass', 'Survived', 'Sex', palette=None,  order=None, hue_order=None )
+FacetGrid.add_legend()
+
+
+
+
+
+
