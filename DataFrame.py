@@ -19,6 +19,16 @@ percent_2 = (round(percent_1, 1)).sort_values(ascending=False)
 missing_data = pd.concat([total, percent_2], axis=1, keys=['Total', '%'])
 missing_data.head(5)
 
+#Conditional Selections
+cond1 = df['Age'] > 60 #returns true or falls values for the column
+cond2 = df[df['Age'] > 60] #returns the DF with the statisfied condition
+#AND
+cond4 = df[(df['Age'] == 11) & (df['SibSp'] == 5)] #AND condition
+cond5 = df[(df.Age == 11) & (df.SibSp == 5)] #same as previous
+#OR
+cond6 = df[(df.Age == 11) | (df.SibSp == 5)] #OR
+cond7 = df.query('(Age == 11) | (SibSp == 5)') #same as previous
+
 
 
 #Counting apearance of values of a feature
