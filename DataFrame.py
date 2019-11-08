@@ -25,7 +25,7 @@ ag1 = df['Survived'].value_counts().plot(kind = 'bar')
 
 
 
-#Conditional Selections
+#Conditional Selection
 cond1 = df['Age'] > 60 #returns true or falls values for the column
 cond2 = df[df['Age'] > 60] #returns the DF with the statisfied condition
 #AND
@@ -74,6 +74,9 @@ df = df.drop(['Cabin'], axis = 1)
 #Replacing NaN values 
 df["Embarked"].fillna("N", inplace = True)
 df['Age'] = df['Age'].fillna(df['Age'].median())
+#most frequent
+df['Embarked'] = df['Embarked'].fillna(df['Embarked'].value_counts().argmax() )
+
 
 #Adding a column of zeros to the DF
 d = pd.DataFrame(0, index=np.arange(418), columns=['category_N'])
@@ -108,4 +111,14 @@ for dataset in data:
     dataset.loc[dataset['relatives'] > 0, 'not_alone'] = 0
     dataset.loc[dataset['relatives'] == 0, 'not_alone'] = 1
     dataset['not_alone'] = dataset['not_alone'].astype(int)
-df['not_alone'].value_counts()
+df['not_alone'].value_s()
+
+
+----Extracting Letters from Feature Values into another column
+df1['Deck'] = df1['Cabin'].map(lambda x: re.compile("([a-zA-Z]+)").search(x).group())
+
+----Maping of Values to another values
+deck = {"A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7, "U": 8}
+dataset['Deck'] = dataset['Deck'].map(deck)
+
+
