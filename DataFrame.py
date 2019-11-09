@@ -96,6 +96,12 @@ dfDummies = pd.get_dummies(df['Sex'], prefix = 'category')
 df = pd.concat([df, dfDummies], axis=1)
 df = df.drop(['Sex'], axis = 1)
 
+---Alternative converting strings into integers
+genders = {"male": 0, "female": 1}
+data = [train_df, test_df]
+for dataset in data:
+    dataset['Sex'] = dataset['Sex'].map(genders)
+
 
 
 #Puting list of prediction into a DataFrame
@@ -116,9 +122,16 @@ df['not_alone'].value_s()
 
 ----Extracting Letters from Feature Values into another column
 df1['Deck'] = df1['Cabin'].map(lambda x: re.compile("([a-zA-Z]+)").search(x).group())
+----Extracting Titles from Names
+df['Title'] = dataset.Name.str.extract(' ([A-Za-z]+)\.', expand=False)
 
 ----Maping of Values to another values
 deck = {"A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7, "U": 8}
 dataset['Deck'] = dataset['Deck'].map(deck)
+
+----Replacing string values
+df['Title'] = df['Title'].replace(['Lady', 'Countess','Capt', 'Col','Don', 'Dr',\
+                                            'Major', 'Rev', 'Sir', 'Jonkheer', 'Dona'], 'Rare')
+
 
 
