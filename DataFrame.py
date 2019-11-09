@@ -34,6 +34,8 @@ cond5 = df[(df.Age == 11) & (df.SibSp == 5)] #same as previous
 #OR
 cond6 = df[(df.Age == 11) | (df.SibSp == 5)] #OR
 cond7 = df.query('(Age == 11) | (SibSp == 5)') #same as previous
+df.loc[:, df.columns != 'b']
+
 
 
 
@@ -133,5 +135,9 @@ dataset['Deck'] = dataset['Deck'].map(deck)
 df['Title'] = df['Title'].replace(['Lady', 'Countess','Capt', 'Col','Don', 'Dr',\
                                             'Major', 'Rev', 'Sir', 'Jonkheer', 'Dona'], 'Rare')
 
+
+-----Cutting Data into categories
+Have to check pd.cut // pd.qcut()
+----------------------------------
 
 
