@@ -13,15 +13,21 @@ df.isnull().sum() / df.shape[0]         #in Percentage
 total = train_df.isnull().sum().sort_values(ascending=False)
 
 #more fancy with percentage
-total = df.isnull().sum().sort_values(ascending=False)
-percent_1 = df.isnull().sum()/df.isnull().count()*100
-percent_2 = (round(percent_1, 1)).sort_values(ascending=False)
-missing_data = pd.concat([total, percent_2], axis=1, keys=['Total', '%'])
-missing_data.head(5)
+total = data.isnull().sum().sort_values(ascending=False)
+percentage = round((data.isnull().sum() / data.shape[0]).sort_values(ascending=False), 2)
+missing_data = pd.concat([total, percentage], axis=1, keys=['Total', '%'])
+missing_data
 
 #Values counts
 ag1 = df['Survived'].value_counts() #aggregates for the values
 ag1 = df['Survived'].value_counts().plot(kind = 'bar')
+
+# Get list of categorical variables
+s = (X_train.dtypes == 'object')
+object_cols = list(s[s].index)
+
+print("Categorical variables:")
+print(object_cols)
 
 
 
@@ -140,4 +146,12 @@ df['Title'] = df['Title'].replace(['Lady', 'Countess','Capt', 'Col','Don', 'Dr',
 Have to check pd.cut // pd.qcut()
 ----------------------------------
 
+
+---- Remove rows with missing target, separate target from predictors
+X_full.dropna(axis=0, subset=['SalePrice'], inplace=True)
+y = X_full.SalePrice
+X_full.drop(['SalePrice'], axis=1, inplace=True
+            
+            
+            
 
