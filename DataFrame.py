@@ -32,6 +32,9 @@ print(object_cols)
 
 
 #Conditional Selection
+#Selecting columns with a certain type
+df.select_dtypes(include=['object']).info()
+
 cond1 = df['Age'] > 60 #returns true or falls values for the column
 cond2 = df[df['Age'] > 60] #returns the DF with the statisfied condition
 #AND
