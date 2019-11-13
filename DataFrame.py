@@ -75,6 +75,14 @@ df.groupby(['Pclass']).Survived.sum()
 ag4 = df.groupby('Survived')['Age'].mean()
 ag5 = df.groupby('Survived')['Age'].std()
 
+--------Correlations between numerical features and a numerical result
+df.corr()['G3'].sort_values()
+
+
+------------Categorical columns:
+categorical_cols = [cname for cname in df.columns if 
+                    df[cname].dtype == "object"]
+
 
 
 
@@ -106,6 +114,17 @@ df['Sex'] = pd.Categorical(df['Sex'])
 dfDummies = pd.get_dummies(df['Sex'], prefix = 'category')
 df = pd.concat([df, dfDummies], axis=1)
 df = df.drop(['Sex'], axis = 1)
+
+-----------
+#AS SIMPLE AS THAT
+df5 = pd.get_dummies(df)
+
+
+category_df = df.select_dtypes(include=['object'])
+dummy_df = pd.get_dummies(category_df)
+
+
+
 
 ---Alternative converting strings into integers
 genders = {"male": 0, "female": 1}
@@ -156,5 +175,10 @@ y = X_full.SalePrice
 X_full.drop(['SalePrice'], axis=1, inplace=True
             
             
+------Cutting the dataset to include only feature wich are most correlated (works only for nummerical values)
+most_correlated = df5.corr().abs()['G3'].sort_values(ascending=False)
+most_correlated = most_correlated[:9]
+most_correlated           
+ 
             
 
