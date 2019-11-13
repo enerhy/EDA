@@ -61,6 +61,61 @@ grid.add_legend();
 
 
 
+-----------COUNTPLOTS
+
+b = sns.countplot(df['G3'])
+b.axes.set_title('Distribution of Final grade of students', fontsize = 30)
+b.set_xlabel('Final Grade', fontsize = 20)
+b.set_ylabel('Count', fontsize = 20)
+plt.show()
+
+b = sns.countplot('age', hue='sex', data=df)
+b.axes.set_title('Number of students in different age groups',fontsize=30)
+b.set_xlabel("Age",fontsize=30)
+b.set_ylabel("Count",fontsize=20)
+plt.show()
+
+
+
+-------------BoxPlot
+#shows the distribution e.g. grades(y) for each age group(x)
+b = sns.boxplot(x='age', y='G3', data=df)
+b.axes.set_title('Age vs Final', fontsize = 30)
+b.set_xlabel('Age', fontsize = 20)
+b.set_ylabel('Final Grade', fontsize = 20)
+plt.show()
+
+
+---------SwarmPlot
+# plotting datapoints
+b = sns.swarmplot(x='age', y='G3',hue='sex', data=df)
+b.axes.set_title('Does age affect final grade?', fontsize = 30)
+b.set_xlabel('Age', fontsize = 20)
+b.set_ylabel('Final Grade', fontsize = 20)
+plt.show()
+
+------Two Distributions of a feature over a feature
+# Grade distribution by address
+sns.kdeplot(df.loc[df['address'] == 'U', 'G3'], label='Urban', shade = True)
+sns.kdeplot(df.loc[df['address'] == 'R', 'G3'], label='Rural', shade = True)
+plt.title('Do urban students score higher than rural students?', fontsize = 20)
+plt.xlabel('Grade', fontsize = 20);
+plt.ylabel('Density', fontsize = 20)
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
