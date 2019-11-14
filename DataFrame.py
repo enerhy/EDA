@@ -45,7 +45,8 @@ cond6 = df[(df.Age == 11) | (df.SibSp == 5)] #OR
 cond7 = df.query('(Age == 11) | (SibSp == 5)') #same as previous
 df.loc[:, df.columns != 'b']
 
-
+#Conditional column
+df.loc[df['address'] == 'U', 'G3']
 
 
 #Counting apearance of values of a feature
