@@ -31,9 +31,12 @@ print(object_cols)
 
 
 
-#Conditional Selection
+----#Conditional Selection
 #Selecting columns with a certain type
 df.select_dtypes(include=['object']).info()
+#Getting the names of columns with a certain type
+categorical_cols = [cname for cname in df.columns if 
+                    df[cname].dtype == "object"]
 
 cond1 = df['Age'] > 60 #returns true or falls values for the column
 cond2 = df[df['Age'] > 60] #returns the DF with the statisfied condition
