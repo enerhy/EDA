@@ -178,6 +178,10 @@ X_full.dropna(axis=0, subset=['SalePrice'], inplace=True)
 y = X_full.SalePrice
 X_full.drop(['SalePrice'], axis=1, inplace=True
             
+#Dropping rows with a certain value
+df.drop(df[df.G3 == 0].index, inplace=True)
+
+            
             
 ------Cutting the dataset to include only feature wich are most correlated (works only for nummerical values)
 most_correlated = df5.corr().abs()['G3'].sort_values(ascending=False)
