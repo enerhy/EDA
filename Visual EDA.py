@@ -104,6 +104,14 @@ plt.ylabel('Density', fontsize = 20)
 plt.show()
 
 
+---------Map Correlation between features (and dependent variable) - HEATMAP
+
+import seaborn as sns
+corr = df.corr()
+sns.heatmap(corr,xticklabels=corr.columns,
+        yticklabels=corr.columns)
+
+
 
 
 
