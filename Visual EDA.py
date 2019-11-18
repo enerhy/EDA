@@ -112,7 +112,12 @@ sns.heatmap(corr,xticklabels=corr.columns,
         yticklabels=corr.columns)
 
 
-
+--------Showing the same graphs for each features
+for col in df.columns[1:]:
+    ax = sns.countplot(df[col], hue=df['Class'], )
+    ax.legend()
+    ax.set_title('Counts of mushroom class in '+col)
+    plt.show()
 
 
 
