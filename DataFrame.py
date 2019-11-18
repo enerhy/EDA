@@ -187,6 +187,20 @@ df.drop(df[df.G3 == 0].index, inplace=True)
 most_correlated = df5.corr().abs()['G3'].sort_values(ascending=False)
 most_correlated = most_correlated[:9]
 most_correlated           
+            
+            
+            
+------------Extracting Features with certain common name part:
+
+color_features = []
+for i in data.columns:
+    if 'color' in i:
+        color_features.append(i)
+# create our color dataframe and inspect first 5 rows with head()
+data_color = data[color_features]
+data_color.head()
+            
+            
  
             
 
