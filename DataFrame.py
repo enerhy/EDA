@@ -202,5 +202,7 @@ data_color.head()
             
             
  
-            
+ --------Shuffle data
+from sklearn.utils import shuffle
+df = shuffle(df)
 
