@@ -206,3 +206,10 @@ data_color.head()
 from sklearn.utils import shuffle
 df = shuffle(df)
 
+            
+----------Rename Columns
+df.rename(columns={"A": "a", "B": "c"})
+            
+            
+            
+            
