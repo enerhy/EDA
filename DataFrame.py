@@ -18,6 +18,91 @@ percentage = round((data.isnull().sum() / data.shape[0]).sort_values(ascending=F
 missing_data = pd.concat([total, percentage], axis=1, keys=['Total', '%'])
 missing_data
 
+# Another way
+# make a list of the variables that contain missing values
+vars_with_na = [var for var in data.columns if data[var].isnull().sum()>1]
+
+# print the variable name and the percentage of missing values
+for var in vars_with_na:
+    print(var, np.round(data[var].isnull().mean(), 2)*100,  ' % missing values')
+
+    
+# Analysis of the NA values in a regression problem
+def analyse_na_value(df, var):
+    df = df.copy()
+    
+    # let's make a variable that indicates 1 if the observation was missing or zero otherwise
+    df[var] = np.where(df[var].isnull(), 1, 0)
+    
+    # let's calculate the mean SalePrice where the information is missing or present
+    df.groupby(var)['SalePrice'].median().plot.bar()
+    plt.title(var)
+    plt.show()
+    
+for var in vars_with_na:
+    analyse_na_value(data, var)
+    
+ 
+----------Numerical Features
+# list of numerical variables
+num_vars = [var for var in data.columns if data[var].dtypes != 'O']
+
+print('Number of numerical variables: ', len(num_vars))
+
+# visualise the numerical variables
+data[num_vars].head()
+
+
+#Showing unique values in several columns
+for var in year_vars:
+    print(var, data[var].unique())
+    print()
+    
+    
+ #Extracting discrete variables
+#  list of discrete variables
+discrete_vars = [var for var in num_vars if len(data[var].unique())<20 and var not in year_vars+['Id']]
+print('Number of discrete variables: ', len(discrete_vars))
+data[discrete_vars].head()
+def analyse_discrete(df, var):
+    df = df.copy()
+    df.groupby(var)['SalePrice'].median().plot.bar()
+    plt.title(var)
+    plt.ylabel('SalePrice')
+    plt.show()
+    
+for var in discrete_vars:
+    analyse_discrete(data, var)
+    
+    
+# Continuous variables
+# list of continuous variables
+cont_vars = [var for var in num_vars if var not in discrete_vars+year_vars+['Id']]
+print('Number of continuous variables: ', len(cont_vars))
+
+def analyse_continous(df, var):
+    df = df.copy()
+    df[var].hist(bins=20)
+    plt.ylabel('Number of houses')
+    plt.xlabel(var)
+    plt.title(var)
+    plt.show()
+    
+for var in cont_vars:
+    analyse_continous(data, var)
+
+
+
+
+
+
+    
+    
+    
+    
+
+
+
 #Values counts
 ag1 = df['Survived'].value_counts() #aggregates for the values
 ag1 = df['Survived'].value_counts().plot(kind = 'bar')
