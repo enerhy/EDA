@@ -112,6 +112,7 @@ sns.heatmap(corr,xticklabels=corr.columns,
         yticklabels=corr.columns)
 
 
+
 --------Showing the same graphs for each features
 for col in df.columns[1:]:
     ax = sns.countplot(df[col], hue=df['Class'], )
@@ -121,10 +122,41 @@ for col in df.columns[1:]:
 
 
 
+----Plotting relationship between dependent variable and an operation of other num features
+# let's explore the relationship between the year variables and the house price in a bit of more details
+def analyse_year_vars(df, var):
+    df = df.copy()
+    
+    # capture difference between year variable and year the house was sold
+    df[var] = df['YrSold'] - df[var]
+    
+    plt.scatter(df[var], df['SalePrice'])
+    plt.ylabel('SalePrice')
+    plt.xlabel(var)
+    plt.show()
+    
+for var in year_vars:
+    if var !='YrSold':
+        analyse_year_vars(data, var)
 
 
-
-
+# Checking for Outliers
+# with Boxplot
+def find_outliers(df, var):
+    df = df.copy()
+    
+    # log does not take negative values, so let's be careful and skip those variables
+    if 0 in data[var].unique():
+        pass
+    else:
+        df[var] = np.log(df[var])
+        df.boxplot(column=var)
+        plt.title(var)
+        plt.ylabel(var)
+        plt.show()
+    
+for var in cont_vars:
+    find_outliers(data, var)
 
 
 
