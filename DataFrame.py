@@ -93,6 +93,48 @@ for var in cont_vars:
 
 
 
+# Checking for Outliers
+# with Boxplot
+def find_outliers(df, var):
+    df = df.copy()
+    
+    # log does not take negative values, so let's be careful and skip those variables
+    if 0 in data[var].unique():
+        pass
+    else:
+        df[var] = np.log(df[var])
+        df.boxplot(column=var)
+        plt.title(var)
+        plt.ylabel(var)
+        plt.show()
+    
+for var in cont_vars:
+    find_outliers(data, var)
+
+    
+---Categorical Features
+### Categorical variables
+cat_vars = [var for var in data.columns if data[var].dtypes=='O']
+print('Number of categorical variables: ', len(cat_vars))
+data[cat_vars].head()
+
+    
+### Dealing with Cardinality and Rare labels
+# Check for cardinality
+for var in cat_vars:
+    print(var, len(data[var].unique()), ' categories')
+
+# Rare Labels
+#Labels that are under-represented in the dataset tend to cause over-fitting of machine learning models.
+def analyse_rare_labels(df, var, rare_perc):
+    df = df.copy()
+    tmp = df.groupby(var)['SalePrice'].count() / len(df)
+    return tmp[tmp<rare_perc]
+
+for var in cat_vars:
+    print(analyse_rare_labels(data, var, 0.01))
+    print()
+    
 
 
 
