@@ -195,6 +195,14 @@ OR
 
 df.Age.mean()
 
+
+#Select columns with a certain prefix or surfix
+#surfix
+X_train.filter(regex='_na$', axis=1).head()
+#prefix
+X_train.filter(regex='^lifeExp',axis=1).head()
+
+
 #Pivot Table - Structuring as ordered in the function
 ag = df.groupby(['Pclass', 'Survived'])['PassengerId'].count()
 
