@@ -112,7 +112,7 @@ for var in cont_vars:
     find_outliers(data, var)
 
     
----Categorical Features
+--------------Categorical Features-----------------------
 ### Categorical variables
 cat_vars = [var for var in data.columns if data[var].dtypes=='O']
 print('Number of categorical variables: ', len(cat_vars))
@@ -201,6 +201,10 @@ df.Age.mean()
 X_train.filter(regex='_na$', axis=1).head()
 #prefix
 X_train.filter(regex='^lifeExp',axis=1).head()
+
+#Select columns execpt of certain columns
+train_vars = [var for var in X_train.columns if var not in ['Id', 'SalePrice']]
+
 
 
 #Pivot Table - Structuring as ordered in the function
