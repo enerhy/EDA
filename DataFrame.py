@@ -240,6 +240,10 @@ df['Age'] = df['Age'].fillna(df['Age'].median())
 df['Embarked'] = df['Embarked'].fillna(df['Embarked'].value_counts().argmax() )
 
 
+#Replacing with nan
+data = data.replace('?', np.nan)
+
+
 #Adding a column of zeros to the DF
 d = pd.DataFrame(0, index=np.arange(418), columns=['category_N'])
 df_test = pd.concat([df_test, d], axis=1)
