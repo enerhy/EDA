@@ -159,6 +159,14 @@ for var in cont_vars:
     find_outliers(data, var)
 
 
+#Plotting a pivot 
+fig = data.groupby(['issue_dt', 'grade'])['loan_amnt'].sum().unstack().plot(
+    figsize=(14, 8), linewidth=2)
+
+fig.set_title('Disbursed amount in time')
+fig.set_ylabel('Disbursed Amount (US Dollars)')
+
+
 
 
 
