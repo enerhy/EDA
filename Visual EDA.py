@@ -167,6 +167,19 @@ fig.set_title('Disbursed amount in time')
 fig.set_ylabel('Disbursed Amount (US Dollars)')
 
 
+# Plotting for several features
+for var in ['cabin', 'sex', 'embarked']:
+    
+    fig = plt.figure()
+    fig = X_train.groupby([var])['survived'].mean().plot()
+    fig.set_title('Relationship between {} and Survival'.format(var))
+    fig.set_ylabel('Mean Survival')
+    plt.show()
+    
+    
+    
+    
+    
 
 
 
