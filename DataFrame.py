@@ -1,3 +1,6 @@
+#Show all coulmns
+pd.set_option('display.max_columns', None)
+
 -------Data Exploration DataFrames-------
 
 df.head()
