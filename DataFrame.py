@@ -58,7 +58,7 @@ data[num_vars].head()
 
 #Showing unique values in several columns
 for var in year_vars:
-    print(var, data[var].unique())
+    print(var, data[var].unique()[0:20], '\n')
     print()
     
     
