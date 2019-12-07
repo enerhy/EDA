@@ -59,6 +59,9 @@ grid.map(plt.hist, 'Age', alpha=.5, bins=20)
 grid.add_legend();
 
 
+---Histograms - several for different features
+X_train[['age', 'fare']].hist(bins=30, figsize=(8,4))
+plt.show()
 
 
 -----------COUNTPLOTS
@@ -178,7 +181,23 @@ for var in ['cabin', 'sex', 'embarked']:
     
     
     
-    
+# Distribution of continuous variables - comparisson after scalling
+fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(12, 5))
+
+# before scaling
+ax1.set_title('Before Scaling')
+sns.kdeplot(X_train['AGE'], ax=ax1)
+sns.kdeplot(X_train['DIS'], ax=ax1)
+sns.kdeplot(X_train['NOX'], ax=ax1)
+
+# after scaling
+ax2.set_title('After Standard Scaling')
+sns.kdeplot(X_train_scaled['AGE'], ax=ax2)
+sns.kdeplot(X_train_scaled['DIS'], ax=ax2)
+sns.kdeplot(X_train_scaled['NOX'], ax=ax2)
+plt.show()
+
+
     
 
 
